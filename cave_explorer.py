@@ -233,12 +233,12 @@ class CaveExplorer(Node):
 
         model_path = self.get_parameter('computer_vision_model_filename').value
         if not model_path or not os.path.exists(model_path):
-            self.get_logger().warn("⚠️ No valid cascade model file found; detector will be disabled.")
+            self.get_logger().warn("No valid cascade model file found; detector will be disabled.")
             self.computer_vision_model_ = None
         else:
             self.computer_vision_model_ = cv2.CascadeClassifier(model_path)
             if self.computer_vision_model_.empty():
-                self.get_logger().error(f"❌ Failed to load cascade from {model_path}; detector disabled.")
+                self.get_logger().error(f"Failed to load cascade from {model_path}; detector disabled.")
                 self.computer_vision_model_ = None
 
         self.image_sub_ = self.create_subscription(Image, 'camera/image', self.image_callback, 1)
